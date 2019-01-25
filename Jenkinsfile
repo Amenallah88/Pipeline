@@ -10,7 +10,7 @@
       bat "mvn clean install package"}
      
    }
-stage('SonarQube analysis') {
+stage('SonarQube analysis code Quality') {
     // requires SonarQube Scanner 2.8+
     def scannerHome = tool 'sonar_Scanner';
     withSonarQubeEnv('sonarQuabe') {
