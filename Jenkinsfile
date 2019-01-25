@@ -10,14 +10,16 @@
       bat "mvn clean install package"}
      
    }
-     stage('SonarQube Analysis') {
-        def mvnHome =  tool name: 'maven3', type: 'maven'
-        withSonarQubeEnv('sonarQuabe') { 
-          bat "${mvnHome}/bin/mvn sonar:sonar"
-        }
+stage('SonarQube analysis') {
+    // requires SonarQube Scanner 2.8+
+    def scannerHome = tool 'sonar_Scanner';
+    withSonarQubeEnv('sonarQuabe') {
+      bat "${scannerHome}/bin/sonar-scanner"
+    }
+  }
     }
     stage('publish to Nexus'){
-  nexusPublisher nexusInstanceId: 'nexusrep', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target\\testNexus-1.2.jar']], mavenCoordinate: [artifactId: 'nexusartifa', groupId: 'org.xxx', packaging: 'jar', version: '3.3']]]
+  nexusPublisher nexusInstanceId: 'nexusrep', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target\\testNexus-1.2.jar']], mavenCoordinate: [artifactId: 'nexusartifa', groupId: 'org.xxx', packaging: 'jar', version: '3.4']]]
     } 
   stage('notification'){
   mail bcc: '', body: 'Ok Ok Ok nice', cc: '', from: '', replyTo: '', subject: 'build avec succées', to: 'mohamed.amine.rekik@gmail.com'
