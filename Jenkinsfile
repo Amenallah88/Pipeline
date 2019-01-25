@@ -14,7 +14,7 @@ stage('SonarQube analysis code Quality') {
     // requires SonarQube Scanner 2.8+
     def scannerHome = tool 'sonar_Scanner';
     withSonarQubeEnv('sonarQuabe') {
-      bat "${scannerHome}\bin\sonar-scanner.bat"
+      bat "${scannerHome}/bin/sonar-scanner.bat"
     }
   }
     stage('publish to Nexus'){
