@@ -13,7 +13,7 @@
      stage('SonarQube Analysis') {
         def mvnHome =  tool name: 'maven3', type: 'maven'
         withSonarQubeEnv('sonarQuabe') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar"
+          bat "${mvnHome}/bin/mvn sonar:sonar"
         }
     }
     stage('publish to Nexus'){
