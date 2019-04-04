@@ -7,14 +7,14 @@
     withMaven(jdk: 'java8', maven: 'maven3', tempBinDir: '') {
  
       // Run the maven build
-      bat "mvn clean install package"}
+      sh "mvn clean install package"}
      
    }
 stage('SonarQube analysis code Quality') {
     // requires SonarQube Scanner 2.8+
     def scannerHome = tool 'sonar_Scanner';
     withSonarQubeEnv('sonarQuabe') {
-      bat "${scannerHome}/bin/sonar-scanner.bat -e -Dsonar.projectName=qualite2 -Dsonar.projectVersion=1.3 -Dsonar.projectKey=hamda -Dsonar.sources=src/main/java -Dsonar.language=java"
+      sh "${scannerHome}/bin/sonar-scanner.sh -e -Dsonar.projectName=qualite2 -Dsonar.projectVersion=1.3 -Dsonar.projectKey=hamda -Dsonar.sources=src/main/java -Dsonar.language=java"
     }
   }
     stage('publish to Nexus'){
