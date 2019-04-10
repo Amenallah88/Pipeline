@@ -1,7 +1,4 @@
  node{
-  stage('SCM Checkout'){
-     git 'https://github.com/rekikamine/Exemple_Test.git'
-   }
    stage('Compile'){
       bat "mvn clean"}
   
